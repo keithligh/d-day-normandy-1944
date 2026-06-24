@@ -2,11 +2,11 @@
 
 # 諾曼第登陸 · D-Day: The Normandy Landings, 1944
 
-### A self-playing 3D documentary of the 6 June 1944 landings, rendered on the **real terrain of Normandy**, with a directed cinematic camera and bilingual narration.
+### A self-playing 3D documentary of the **6 June 1944 landings**, rendered on the **real terrain of Normandy**, with a directed cinematic camera and bilingual narration.
 
 [![live demo](https://img.shields.io/badge/live_demo-online-2ea44f?style=for-the-badge)](https://keithligh.github.io/d-day-normandy-1944/)
 &nbsp;
-[![engine](https://img.shields.io/badge/engine-cinematic--3d--battle--engine-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/keithligh/cinematic-3d-battle-engine)
+[![built on the open engine](https://img.shields.io/badge/built_on-the_open_engine-d97757?style=for-the-badge&logo=github&logoColor=white)](https://github.com/keithligh/cinematic-3d-battle-engine)
 &nbsp;
 [![Star this repo](https://img.shields.io/badge/%E2%98%85_Star_this_repo-FFD93D?style=for-the-badge&logo=github&logoColor=181717)](https://github.com/keithligh/d-day-normandy-1944)
 
@@ -14,7 +14,10 @@
 [![content CC BY 4.0](https://img.shields.io/badge/content-CC_BY_4.0-blue)](https://creativecommons.org/licenses/by/4.0/)
 [![Three.js r128](https://img.shields.io/badge/Three.js-r128-000000)](https://threejs.org/)
 [![no build, runs offline](https://img.shields.io/badge/build-none-success)](#run-it-locally)
-[![Built with Claude Code](https://img.shields.io/badge/built_with-Claude_Code-d97757)](https://claude.com/claude-code)
+
+[![D-Day in 3D: a directed cinematic camera over the real Normandy coast during the 6 June 1944 landings, with bilingual captions, place labels, period flags and troop-strength readouts](docs/demo.gif)](https://keithligh.github.io/d-day-normandy-1944/)
+
+**▶ [Try the live demo](https://keithligh.github.io/d-day-normandy-1944/)** &nbsp;·&nbsp; **🔧 [Built on the open engine, fork your own](https://github.com/keithligh/cinematic-3d-battle-engine)**
 
 </div>
 
@@ -34,14 +37,17 @@ landing hour the seaborne assault hit five beaches: Utah and Omaha (American), G
 disaster; the other beaches broke through the Atlantic Wall. By nightfall the Allies held five beachheads, not yet
 linked and with Caen still in German hands, but they had a foothold in Europe, at a cost of at least 4,400 Allied dead.
 
-This documentary is built on **[cinematic-3d-battle-engine](https://github.com/keithligh/cinematic-3d-battle-engine)**,
-an open-source engine that renders any battle as a self-playing 3D documentary on real-scale terrain. Fork it to your own.
+## Highlights
+
+- 🗺️ **Real Normandy, to scale.** Actual SRTM elevation and Sentinel-2 satellite imagery, projected by real lng/lat. Not a stylised map.
+- 🎬 **It directs itself.** A cinematic "Director" plays 6 to 9 June as a sequence of shots; grab the camera any time to free-look, and it resumes.
+- ⚔️ **Historically sourced.** Dated troop movements, the five beaches, the airborne drops, the commanders, and the real June 1944 flags (the 48-star US flag, the green-leaf Canadian Red Ensign, the Free French tricolour with the Cross of Lorraine, and the German Iron Cross, never the swastika).
+- 🌧️ **Atmosphere.** Naval gunfire, smoke, the Channel weather, and a day/night cycle.
+- 🌏 **Bilingual.** 中文 and English narration and labels throughout.
+- ⚡ **Zero infrastructure.** No build, no backend, no API keys; runs offline from static files.
+- 🤖 **Engineered with AI, in the open.** Built through agentic engineering with Claude Code, and running on an open-source engine anyone can fork.
 
 ## Gallery
-
-[![D-Day in 3D: a directed cinematic camera over the real Normandy coast, with bilingual captions, place labels, period flags and troop-strength readouts](docs/demo.gif)](https://keithligh.github.io/d-day-normandy-1944/)
-
-<div align="center"><b>▶ <a href="https://keithligh.github.io/d-day-normandy-1944/">Try the live demo</a></b></div>
 
 <table>
   <tr>
@@ -54,16 +60,10 @@ an open-source engine that renders any battle as a self-playing 3D documentary o
   </tr>
 </table>
 
-> Every frame is the live engine over real SRTM elevation and Sentinel-2 satellite imagery. Geography is present-day; see *Historical accuracy* below.
+> Every still above is a real frame from the live engine over real SRTM elevation and Sentinel-2 satellite imagery.
+> Geography is **present-day**; the 1944 coastline and defences differed, so see *Historical accuracy* below.
 
-## Highlights
-
-- 🗺️ **Real Normandy, to scale.** Actual SRTM elevation and Sentinel-2 satellite imagery, projected by real lng/lat. Not a stylised map.
-- 🎬 **It directs itself.** A cinematic "Director" plays 6 to 9 June as a sequence of shots; grab the camera any time to free-look, and it resumes.
-- ⚔️ **Historically sourced.** Dated troop movements, the five beaches, the airborne drops, the commanders, and the real June 1944 flags (the 48-star US flag, the green-leaf Canadian Red Ensign, the Free French tricolour with the Cross of Lorraine, and the German Iron Cross, never the swastika).
-- 🌧️ **Atmosphere.** Naval gunfire, smoke, the Channel weather, and a day/night cycle.
-- 🌏 **Bilingual.** 中文 and English narration and labels throughout.
-- ⚡ **Zero infrastructure.** No build, no backend, no API keys; runs offline from static files.
+> _If this made you think "wow, AI can build that?", a ⭐ helps other people find it._
 
 ## Run it locally
 
@@ -85,7 +85,7 @@ Map tiles must be loaded over HTTP (same-origin). Opening `index.html` via `file
 ## How it works
 
 - **Terrain:** AWS "Terrarium" elevation tiles (SRTM/USGS, public domain) decoded to a real height-mesh, Web-Mercator,
-  to scale (with a vertical exaggeration for legibility).
+  to scale (with a fixed vertical exaggeration for legibility).
 - **Surface:** EOX *Sentinel-2 cloudless 2016* satellite imagery draped over the terrain.
 - **Direction:** a state-machine "Director" plays a fixed storyboard of shots; free-look pauses it.
 - Everything is data-driven from `data.js` (forces, dated movement tracks, front lines, weather, storyboard,
@@ -93,11 +93,22 @@ Map tiles must be loaded over HTTP (same-origin). Opening `index.html` via `file
 
 ## How it was built
 
-You can build something like this yourself: fork **[cinematic-3d-battle-engine](https://github.com/keithligh/cinematic-3d-battle-engine)**,
-the open engine this documentary runs on. This one came first, before that engine existed, so it was built the harder
-way, through agentic engineering. It started from a single initial prompt and was engineered by hand from there: the
-architecture, the research, and the shot-by-shot direction that turn a prompt into a finished film. Agentic
-engineering, not prompt-to-app.
+This documentary came before the engine it now runs on existed, so it was built the harder way, through **agentic
+engineering**. It began as a written brief and was engineered by hand from there, pass by pass: the architecture, the
+historical research, and the shot-by-shot direction that turn a brief into a finished film. Not prompt-to-app. The
+reusable engine, **[cinematic-3d-battle-engine](https://github.com/keithligh/cinematic-3d-battle-engine)**, was
+extracted from this work, so the next battle does not have to be built the hard way.
+
+## Build your own
+
+This documentary runs on **[cinematic-3d-battle-engine](https://github.com/keithligh/cinematic-3d-battle-engine)**, an
+open-source engine that renders any battle, historical or fictional, as a self-playing 3D documentary on real-scale
+satellite and elevation terrain. You describe a battle in a data file and the engine renders it: no build, no backend,
+no API keys. Clone the engine, follow its
+**[PLAYBOOK](https://github.com/keithligh/cinematic-3d-battle-engine/blob/main/PLAYBOOK.md)**, and make your own. See it
+applied to another campaign in
+**[the Battle of Hong Kong 1941](https://github.com/keithligh/battle-of-hong-kong-1941)**
+([live demo](https://keithligh.github.io/battle-of-hong-kong-1941/)).
 
 ## Licensing
 
@@ -108,9 +119,11 @@ engineering, not prompt-to-app.
 
 ## Credits and data sources
 
-- Satellite imagery: **Sentinel-2 cloudless 2016 © EOX IT Services GmbH** (s2maps.eu); contains modified Copernicus Sentinel data.
+- Satellite imagery: **Sentinel-2 cloudless 2016 © EOX IT Services GmbH** (s2maps.eu); contains modified Copernicus
+  Sentinel data.
 - Elevation: **SRTM, courtesy U.S. Geological Survey** via AWS Terrain Tiles.
-- 3D engine: **Three.js** (MIT), via **[cinematic-3d-battle-engine](https://github.com/keithligh/cinematic-3d-battle-engine)**.
+- 3D engine: **Three.js** (MIT), via
+  **[cinematic-3d-battle-engine](https://github.com/keithligh/cinematic-3d-battle-engine)**.
 - Historical sources: Wikipedia "Normandy landings"; Gordon A. Harrison, *Cross-Channel Attack* (U.S. Army Center of
   Military History); Cornelius Ryan, *The Longest Day*; the Imperial War Museums; the National WWII Museum; the Juno
   Beach Centre; and the U.S. National D-Day Memorial (casualty figures).
