@@ -124,6 +124,7 @@ applied to another campaign in
 - Elevation: **SRTM, courtesy U.S. Geological Survey** via AWS Terrain Tiles.
 - 3D engine: **Three.js** (MIT), via
   **[cinematic-3d-battle-engine](https://github.com/keithligh/cinematic-3d-battle-engine)**.
+- Background music: *"Gray Tide at Normandy"*, composed by Keith Li with **Suno**.
 - Historical sources: Wikipedia "Normandy landings"; Gordon A. Harrison, *Cross-Channel Attack* (U.S. Army Center of
   Military History); Cornelius Ryan, *The Longest Day*; the Imperial War Museums; the National WWII Museum; the Juno
   Beach Centre; and the U.S. National D-Day Memorial (casualty figures).

@@ -9,3 +9,11 @@ deploy/
 Thumbs.db
 *.log
 node_modules/
+
+# ASGA governance artifacts -- kept out of the public repo
+Implementation_Plan_*.md
+Reasoning_Artifact_*.md
+Walkthrough_Artifact_*.md
+System_Impact_*.md
+Project_State_Audit.md
+DEFERRED.md

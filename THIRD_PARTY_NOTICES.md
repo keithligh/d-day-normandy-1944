@@ -62,3 +62,17 @@ Source: https://s2maps.eu · https://cloudless.eox.at
 Delivered as Terrarium terrain-RGB via the AWS Open Data "Terrain Tiles" program
 (`s3://elevation-tiles-prod`). Source: https://registry.opendata.aws/terrain-tiles/
 · https://github.com/tilezen/joerd/blob/master/docs/attribution.md
+
+---
+
+## 3. Background music: `lib/gray-tide-at-normandy.mp3`
+
+"Gray Tide at Normandy" is an **original AI-generated instrumental composed by the
+author (Keith Li) using Suno** (https://suno.com) under a paid (commercial) Suno
+plan, which grants Keith Li distribution rights. The file embeds AI-generated
+cover art produced by the same service.
+
+Because the track is fully AI-generated, it is likely **not protected by copyright**
+under current U.S. law, and **no exclusive copyright is asserted** over the audio or
+its embedded cover art. You may reuse it; attribution to Keith Li is appreciated
+but not legally required.
