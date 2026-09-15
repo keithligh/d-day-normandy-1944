@@ -153,6 +153,7 @@
   #notes .nbody ul{margin:0 0 6px 2px;list-style:none}
   #notes .nbody li{position:relative;padding-inline-start:15px;margin-bottom:7px}                 /* logical: bullet sits on the reading-start side (left LTR, right RTL) */
   #notes .nbody li::before{content:"▸";position:absolute;inset-inline-start:0;color:var(--accent)}
+  #notes .nbody .en{display:block;margin-top:5px;font-family:var(--mono);font-size:11.5px;opacity:.78;direction:ltr;unicode-bidi:isolate}   /* the panel's secondary language, same treatment .lbl .en and #caption .ttl .en already give it; scoped to #notes so it cannot reach them */
   [data-text-dir="rtl"] #notes .nbody li::before{content:"◂"}   /* RTL: the marker points the reading direction (left) */
   [data-text-dir="rtl"] #caption .cmd{direction:rtl;unicode-bidi:isolate}   /* RTL: commander chips flow with the text (a Latin rank still isolates) */
 
