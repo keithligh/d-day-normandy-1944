@@ -17,3 +17,6 @@ Walkthrough_Artifact_*.md
 System_Impact_*.md
 Project_State_Audit.md
 DEFERRED.md
+# Closed ledger rows and retired audit sections move to these. Exact names, like the two above.
+DEFERRED_ARCHIVE.md
+Project_State_Audit_ARCHIVE.md
