@@ -43,7 +43,7 @@ linked and with Caen still in German hands, but they had a foothold in Europe, a
 - 🎬 **It directs itself.** A cinematic "Director" plays 6 to 9 June as a sequence of shots; grab the camera any time to free-look, and it resumes.
 - ⚔️ **Historically sourced.** Dated troop movements, the five beaches, the airborne drops, the commanders, and the real June 1944 flags (the 48-star US flag, the green-leaf Canadian Red Ensign, the Free French tricolour with the Cross of Lorraine, and the German Iron Cross, never the swastika).
 - 🌧️ **Atmosphere.** Naval gunfire, smoke, the Channel weather, and a day/night cycle.
-- 🌏 **Bilingual.** 中文 and English narration and labels throughout.
+- 🌏 **Bilingual.** 中文 and English narration, captions, place labels and sourcing notes.
 - ⚡ **Zero infrastructure.** No build, no backend, no API keys; runs offline from static files.
 - 🤖 **Engineered with AI, in the open.** Built through agentic engineering with Claude Code, and running on an open-source engine anyone can fork.
 
