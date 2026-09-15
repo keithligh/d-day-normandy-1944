@@ -22,14 +22,18 @@ window.BATTLE_DATA = (function () {
    *  Migrated from the old forked engine's config.js (CFG.GEO / DAY / GRADE). */
   const meta = {
     geo:{ minLng:-1.50, maxLng:-0.10, minLat:49.13, maxLat:49.45, Z:13 },
-    // vexag: pinned ABOVE the engine's VEXAG_MAX, deliberately. Measured relief in this box is
-    // ~198 m over ~102 km, so the engine's own auto-derive (RELIEF_UNITS/(reliefM*M2U)) wants
-    // ~22.4, but VEXAG_MAX caps it at 6, a guard meant to stop flat theatres spiking. Normandy
-    // IS flat, so the cap is what flattens it. Measured relief at the features that mattered,
-    // rendered units before -> after: Pointe du Hoc headland (25.5 m) 3.9 -> 9.7, the Omaha
-    // bluffs (40.5 m) 6.1 -> 15.4, the Caen plain (50.6 m) 7.7 -> 19.2, on a 1,931-unit-wide map.
-    // Chosen just under the uncapped 22.4; higher starts to look alpine, which this coast is not.
-    dayMin:6, dayMax:9.5, year:1944, month:6, lastDay:9, vexag:20,
+    // vexag: pinned ABOVE the engine's VEXAG_MAX (6), which would otherwise render this coast as a
+    // flat plate. THIS VALUE HAS TWO PROPERTIES IN TENSION AND BOTH MUST BE CHECKED TOGETHER:
+    //   visible  - relief must read at all. The engine's own uncapped auto-derive wants ~22.4 here
+    //              (198 m of relief over 102 km), and below ~10 the coast reads as a painted plane.
+    //   honest   - only Y is scaled (terrain.js:102), so apparent slope = atan(tan(real) * vexag).
+    //              The FLATTER the ground, the bigger the lie, and Normandy is mostly flat.
+    // Apparent slope at 12x vs the real gradient: Omaha bluffs 5.8 deg -> 50.5, Pointe du Hoc
+    // 6.8 -> 55.2, Caen plain 3.4 -> 35.6, Cotentin marshes 1.7 -> 19.7. At 20x the plain read 50
+    // deg and the flooded marshes 31, which contradicts the very facts the narration relies on.
+    // 12 is where the decisive terrain still reads and the overstatement is smallest; it is still
+    // not honest about a 3 deg plain, which is why notes.caveats[0] says so out loud.
+    dayMin:6, dayMax:9.5, year:1944, month:6, lastDay:9, vexag:12,
     title:"諾曼第登陸", subtitle:"D-DAY · THE NORMANDY LANDINGS · 6 JUNE 1944",
     dir:"ltr",
     fonts:{ display:'"Microsoft JhengHei","PingFang TC","Noto Sans TC","Heiti TC",sans-serif',
@@ -342,7 +346,7 @@ window.BATTLE_DATA = (function () {
   const notes = {
     summary:"諾曼第登陸，1944年6月6日：大君主行動，盟軍進攻德佔法國。在盟軍最高統帥艾森豪指揮、蒙哥馬利統籌登陸下，約十五萬六千名官兵由海空兩路橫渡英倫海峽。午夜剛過，三個空降師奪取兩翼——美軍第82、101師空降科唐坦半島（聖梅爾埃格利斯），英軍第6師空降奧恩河以東（佩加索斯橋、梅維爾砲台）。登陸時刻，海上突擊強攻五處海灘：猶他、奧馬哈（美軍）、黃金（英軍）、朱諾（加軍）、寶劍（英軍），自由法國突擊隊則登陸烏伊斯特勒昂。奧馬哈面對久經沙場的德軍第352師，幾近全軍覆沒；其餘各灘則突破大西洋壁壘。入夜時，盟軍據有五處灘頭——尚未連成一線，卡昂仍在德軍手中——但已在歐陸站穩腳跟，代價是至少四千四百名盟軍將士陣亡。<span class='en'>D-Day, 6 June 1944: Operation Overlord, the Allied assault on German-occupied France. Under Eisenhower as Supreme Commander, with Montgomery commanding the landing forces, some 156,000 men crossed the Channel by sea and by air. Just after midnight three airborne divisions seized the flanks: the US 82nd and 101st over the Cotentin around Sainte-Mère-Église, and the British 6th east of the Orne at Pegasus Bridge and the Merville Battery. At the landing hour the seaborne assault hit five beaches: Utah and Omaha (American), Gold (British), Juno (Canadian) and Sword (British), with Free French commandos at Ouistreham. Omaha, facing the veteran German 352nd Division, came close to disaster; the other beaches broke through the Atlantic Wall. By nightfall the Allies held five beachheads, not yet linked and with Caen still in German hands, but they had a foothold in Europe, at a cost of at least 4,400 Allied dead.</span>",
     caveats:[
-      "地形為真實資料：高程取自 AWS Terrarium DEM、地表為 EOX Sentinel-2 cloudless 2016（現代衛星影像），以 Web Mercator 投影按真實比例呈現；垂直高度作 20 倍誇張以利判讀（水平比例不變）。諾曼第沿岸地勢本就低緩，若不作此誇張，決定戰事的崖壁與高地在畫面上幾乎無從辨識。<span class='en'>The terrain is real data: elevation from AWS Terrarium DEM, surface from EOX Sentinel-2 cloudless 2016 (modern satellite imagery), projected to scale in Web Mercator. Vertical height is exaggerated 20x for legibility; the horizontal scale is unchanged. The Normandy coast is genuinely low-relief country, and without that exaggeration the bluffs and cliffs that decided the fighting would be almost impossible to make out on screen.</span>",
+      "地形為真實資料：高程取自 AWS Terrarium DEM、地表為 EOX Sentinel-2 cloudless 2016（現代衛星影像），以 Web Mercator 投影按真實比例呈現；垂直高度作 12 倍誇張以利判讀（水平比例不變）。諾曼第沿岸地勢本就低緩，若不作此誇張，決定戰事的崖壁與高地在畫面上幾乎無從辨識。但請注意：由於只放大垂直方向，畫面上的坡度看起來遠比實際陡峭。奧馬哈崖坡實際約 5.8 度、卡昂平原約 3.4 度、科唐坦沼澤約 1.7 度，皆為平緩地形。<span class='en'>The terrain is real data: elevation from AWS Terrarium DEM, surface from EOX Sentinel-2 cloudless 2016 (modern satellite imagery), projected to scale in Web Mercator. Vertical height is exaggerated 12x for legibility; the horizontal scale is unchanged. The Normandy coast is genuinely low-relief country, and without that exaggeration the bluffs and cliffs that decided the fighting would be almost impossible to make out on screen. Be aware that because only the vertical is stretched, slopes on screen look far steeper than they are: the Omaha bluffs actually rise at about 5.8 degrees, the Caen plain at 3.4, and the Cotentin marshes at 1.7. This is gentle country.</span>",
       "注意：影像與高程均為現代資料。1944年的海岸線、德軍刻意氾濫（戰後已排乾）的科唐坦沼澤、大西洋壁壘工事，以及戰後建設（烏伊斯特勒昂渡輪港、阿羅芒什的人工港遺跡、現代道路）皆與1944年6月不同。灘頭與部隊位置僅按真實地名經緯度作示意。<span class='en'>Note: the imagery and elevation are both modern. The 1944 coastline, the Cotentin marshes the Germans deliberately flooded (since drained), the Atlantic Wall fortifications, and postwar construction (the Ouistreham ferry port, the Mulberry harbour remains at Arromanches, modern roads) all differ from June 1944. Beaches and unit positions are shown only approximately, anchored to real place-name coordinates.</span>",
       "各部隊軍旗採用1944年6月各軍實際旗幟：48星美國國旗（1912–59年；48星而非50星）、1801年版英國聯合旗、1922–57年加拿大紅船旗（綠楓葉，楓葉旗為1965年）、自由法國三色旗加洛林十字，以及德軍鐵十字（巴爾肯十字，國防軍軍徽）。此處刻意採用鐵十字而非納粹十字（卐）：既符合史實、各地（含德國）合法，亦避免使用受禁符號。<span class='en'>Unit markers fly the real flag each force used in June 1944: the 48-star United States flag (1912 to 1959; 48 stars, not 50), the 1801 Union Flag, the Canadian Red Ensign (green maple leaf, 1922 to 1957; the Maple Leaf flag dates from 1965), the Free French tricolour with the Cross of Lorraine, and, for the German forces, the Iron Cross (Balkenkreuz), the Wehrmacht's insignia. The Iron Cross is used deliberately and not the swastika: it is historically accurate, legal everywhere including Germany, and avoids a prohibited symbol.</span>",
       "兵力為D日投入／登陸的概數。6月6日約十五萬六千名盟軍登陸（美軍約七萬三千、英加約八萬三千，含約二萬三千四百名空降兵）。德軍各師按代表性兵力示意，並非全數投入接戰。<span class='en'>Strengths are approximations of what was committed or landed on D-Day. About 156,000 Allied troops landed on 6 June (roughly 73,000 American and 83,000 British and Canadian, including some 23,400 airborne). German divisions are shown at representative strength, not their full committed force.</span>",
